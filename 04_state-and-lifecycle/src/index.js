@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "semantic-ui-css/semantic.min.css"; //import css of Semantic UI framework
 import Season from "./Season";
+import Spinner from "./Spinner";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -52,15 +53,20 @@ class App extends React.Component {
     console.log("The component will be no longer shown");
   }
 
-  // render
-  render() {
+  //helper method
+  renderContent() {
     if (this.state.lat && !this.state.errorMessage) {
       return <Season lat={this.state.lat} />;
     }
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage}</div>;
     }
-    return <div>Loading...</div>;
+    return <Spinner message="Waiting..." />;
+  }
+
+  // render
+  render() {
+    return <div className="content">{this.renderContent()}</div>;
   }
 }
 
