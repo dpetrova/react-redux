@@ -11,10 +11,28 @@ class SearchBar extends React.Component {
     console.log("Element was clicked");
   }
 
+  onFormSubmit1(event) {
+    //prevent default subtit behaviour (automatically submit and refresh the page when Enter is pressed when typing in an input)
+    event.preventDefault();
+    this.props.onSearchBarSubmit(this.state.term); //call parent's callback passed as a prop
+  }
+
+  onFormSubmit2 = (event) => {
+    //prevent default subtit behaviour (automatically submit and refresh the page when Enter is pressed when typing in an input)
+    event.preventDefault();
+    this.props.onSearchBarSubmit(this.state.term); //call parent's callback passed as a prop
+  };
+
   render() {
     return (
       <div className="ui segment">
-        <form className="ui form">
+        {/* use arrow function here if access the normal function */}
+        {/* <form
+          onSubmit={(event) => this.onFormSubmit1(event)}
+          className="ui form"
+        > */}
+        {/* the accessed function must be arrow function   */}
+        <form onSubmit={this.onFormSubmit2} className="ui form">
           <div className="field">
             <label>Image search</label>
             {/* <input
