@@ -5,6 +5,19 @@ import axios from "axios";
 const Search = () => {
   const [term, setTerm] = useState("");
   const [results, setResults] = useState([]);
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
+
+  /*  throttling (debouncing) */
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 500);
+
+    // cleanup function (the only one thing that can be returned in useEffect)
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
   useEffect(() => {
     const search = async () => {
@@ -14,15 +27,47 @@ const Search = () => {
           list: "search",
           origin: "*",
           format: "json",
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       });
 
       setResults(data.query.search);
     };
 
-    if (term) search();
-  }, [term]);
+    if (debouncedTerm) search();
+  }, [debouncedTerm]);
+
+  //   useEffect(() => {
+  //     const search = async () => {
+  //       const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
+  //         params: {
+  //           action: "query",
+  //           list: "search",
+  //           origin: "*",
+  //           format: "json",
+  //           srsearch: term,
+  //         },
+  //       });
+
+  //       setResults(data.query.search);
+  //     };
+
+  //     /*  throttling the call */
+  //     if (term && !results.length) {
+  //       //initial search without throttling
+  //       search();
+  //     } else {
+  //       // delay the call
+  //       const timerId = setTimeout(() => {
+  //         if (term) search();
+  //       }, 500);
+
+  //       // cleanup function (the only one thing that can be returned in useEffect)
+  //       return () => {
+  //         clearTimeout(timerId);
+  //       };
+  //     }
+  //   }, [term]);
 
   /* useEffect is a function that takes 2 arguments: first -> is a function; second -> control when the function is executed 
 
