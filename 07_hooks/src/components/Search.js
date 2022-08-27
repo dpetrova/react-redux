@@ -14,6 +14,7 @@ const Search = () => {
     }, 500);
 
     // cleanup function (the only one thing that can be returned in useEffect)
+    // it is called when component unmount (remove from the DOM)!!!
     return () => {
       clearTimeout(timerId);
     };
