@@ -3,6 +3,7 @@ import React from "react";
 const ApprovalCard = (props) => {
   return (
     <div className="ui card">
+      {/* props.children is child component provided to parent component */}
       <div className="content">{props.children}</div>
       <div className="extra content">
         <div className="ui two buttons">

@@ -12,6 +12,7 @@ const App = () => {
   return (
     <div className="ui container comments">
       <ApprovalCard>
+        {/* inner component is provided to outer (parent) component as a prop called children (props.children) */}
         <Comment
           author="Danny"
           timeAgo="Today at 7:00PM"

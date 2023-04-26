@@ -20,11 +20,12 @@ const App = () => {
       <input id="name" type="text" />
       {/* 
       inline style is written in {{}} -> first {} indicates that we are going to reference a JS variable inside JSX, second {} is a JS object that we are referencing;
-      cebap-case (e.g. background-color) is turn into a camelCase (backgroundColor)
+      kebap-case (e.g. background-color) is turn into a camelCase (backgroundColor)
       */}
       <button style={{ backgroundColor: "blue", color: "white" }}>
         {button.text}
       </button>
+      <h3>Current time:</h3>
       <h3>{getTime()}</h3>
     </div>
   );
