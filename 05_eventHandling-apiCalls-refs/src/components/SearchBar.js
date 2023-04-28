@@ -12,14 +12,14 @@ class SearchBar extends React.Component {
   }
 
   onFormSubmit1(event) {
-    //prevent default subtit behaviour (automatically submit and refresh the page when Enter is pressed when typing in an input)
     event.preventDefault();
-    this.props.onSearchBarSubmit(this.state.term); //call parent's callback passed as a prop
+    this.props.onSearchBarSubmit(this.state.term);
   }
 
   onFormSubmit2 = (event) => {
     //prevent default subtit behaviour (automatically submit and refresh the page when Enter is pressed when typing in an input)
     event.preventDefault();
+    // in arrow function we can access correct "this" context
     this.props.onSearchBarSubmit(this.state.term); //call parent's callback passed as a prop
   };
 
