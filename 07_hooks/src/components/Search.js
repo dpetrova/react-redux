@@ -4,17 +4,62 @@ import axios from "axios";
 
 const Search = () => {
   const [term, setTerm] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState(term); //time lagged search term used to throttle api requests
   const [results, setResults] = useState([]);
-  const [debouncedTerm, setDebouncedTerm] = useState(term);
+
+  /* --- USEEFFECT ----
+  useEffect is a function that takes 2 arguments: first -> is a function; second -> control when the function is executed 
+
+  //run at initial render
+  useEffect(() => {
+    console.log("I ONLY RUN ONCE AT INITIAL RENDER");
+  }, []);
+
+  //run at initial render; and run after every rerender
+  useEffect(() => {
+    console.log("I RUN WITH EVERY RENDER");
+  });
+
+  //run at initial render; and run after every rerender if "term" has chanded since last render
+  useEffect(() => {
+    console.log("I RUN WITH EVERY RENDER IF term DATA IS CHANGED");
+  }, [term]);
+
+  */
+
+  /* --- USING ASYNC FUNCTIONS WITH USEEFFECT ---
+
+  //using async helper function
+  useEffect(() => {
+    const search = async () => {
+      const response = await axios.get("url");
+    };
+    search();
+  }, [term]);
+
+  //using IIFE helper function
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get("url");
+    })();
+  }, [term]);
+
+  //using promises
+  useEffect(() => {
+    axios.get("url").then((response) => {});
+  }, [term]);
+
+  */
 
   /*  throttling (debouncing) */
+  //flow: 1. invoke cleanup function returned from last time of useEffect invoking; 2. invoke overall useEffect function again
   useEffect(() => {
     const timerId = setTimeout(() => {
       setDebouncedTerm(term);
     }, 500);
 
     // cleanup function (the only one thing that can be returned in useEffect)
-    // it is called when component unmount (remove from the DOM)!!!
+    // it is called when component unmount (remove from the DOM) or updated and rerender!!!
     return () => {
       clearTimeout(timerId);
     };
@@ -69,49 +114,6 @@ const Search = () => {
   //       };
   //     }
   //   }, [term]);
-
-  /* useEffect is a function that takes 2 arguments: first -> is a function; second -> control when the function is executed 
-
-  //run at initial render
-  useEffect(() => {
-    console.log("I ONLY RUN ONCE AT INITIAL RENDER");
-  }, []);
-
-  //run at initial render; and run after every rerender
-  useEffect(() => {
-    console.log("I RUN WITH EVERY RENDER");
-  });
-
-  //run at initial render; and run after every rerender if term has chanded since last render
-  useEffect(() => {
-    console.log("I RUN WITH EVERY RENDER IF term DATA IS CHANGED");
-  }, [term]);
-
-  */
-
-  /* using async functions with useEffect 
-
-  //using async helper function
-  useEffect(() => {
-    const search = async () => {
-      const response = await axios.get("url");
-    };
-    search();
-  }, [term]);
-
-  //using IIFE helper function
-  useEffect(() => {
-    (async () => {
-      const response = await axios.get("url");
-    })();
-  }, [term]);
-
-  //using promises
-  useEffect(() => {
-    axios.get("url").then((response) => {});
-  }, [term]);
-
-  */
 
   const renderedResults = results.map((result) => {
     return (

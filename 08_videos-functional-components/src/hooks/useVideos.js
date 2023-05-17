@@ -1,3 +1,5 @@
+/* CREATE CUSTOM HOOK */
+
 import { useState, useEffect } from "react";
 import youtube from "../apis/youtube";
 
@@ -18,6 +20,7 @@ const useVideos = (defaultSearchTerm) => {
     setVideos(response.data.items);
   };
 
+  // return list of videos (piece of state) and function used to change the list of videos
   return [videos, search];
 };
 

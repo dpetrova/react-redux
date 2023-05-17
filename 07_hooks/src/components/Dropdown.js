@@ -5,12 +5,12 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   const dropdownRef = useRef();
 
   /* the order of events: 
-  - first are called the native events element.addEventListener(...)
-  - second are called those events setup in React onClick={}
-  - each with event bubbling child->parent
+  - first are called the native events such as element.addEventListener(...)
+  - second are called those events setup in React such as onClick={}
+  - each of these eventa are bubbling up child->parent
   */
 
-  // close the dropdown when click outside it
+  /*  close the dropdown when click outside it */
   useEffect(() => {
     const onBodyClick = (event) => {
       // do nothing if click on element inside the dropdown
@@ -32,7 +32,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   }, []);
 
   const renderedOptions = options.map((option) => {
-    if (option.value === selected.value) return null;
+    if (option.value === selected.value) return null; // filter already selected option from list of options
     return (
       <div
         key={option.value}
@@ -47,13 +47,17 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
   return (
     <div ref={dropdownRef} className="ui form">
       <div className="field">
+        {/* dropdown label */}
         <label className="label">{label}</label>
+        {/* dropdown */}
         <div
           onClick={() => setOpen(!open)}
           className={`ui selection dropdown ${open ? "visible active" : ""}`}
         >
           <i className="dropdown icon"></i>
+          {/* selected option */}
           <div className="text">{selected.label}</div>
+          {/* dropdown options */}
           <div className={`menu ${open ? "visible transition" : ""}`}>
             {renderedOptions}
           </div>
