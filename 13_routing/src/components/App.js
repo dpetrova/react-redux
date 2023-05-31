@@ -29,7 +29,7 @@ const App = () => {
               Page Two
             </Link>
           </div>
-          {/* page */}
+          {/* components inside BrowserRouter are visible depending on current URL */}
           <Route path="/" exact component={PageOne} />
           <Route path="/pagetwo" component={PageTwo} />
         </div>
