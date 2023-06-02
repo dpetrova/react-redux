@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class GoogleOAuth extends Component {
   state = { isSignedIn: null };
 
-  /* depricated flow (using Google API Client Library for JavaScript (gapi) -> https://apis.google.com/js/api.js) */
+  /* depricated flow of using Google API Client Library for JavaScript (gapi) -> https://apis.google.com/js/api.js */
   // 1.load Google JavaScript client library
   // 2.initialize it
   // 3.get a reference to the auth object after it is initialized
