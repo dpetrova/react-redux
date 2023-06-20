@@ -1,0 +1,27 @@
+{
+  "streams": [
+    {
+      "title": "test",
+      "description": "Try to create a stream",
+      "id": 1
+    },
+    {
+      "description": "Sream from logged user",
+      "title": "Sream_1",
+      "userId": "110325409147468293205",
+      "id": 2
+    },
+    {
+      "title": "Stream_3",
+      "description": "Programatic navigation",
+      "userId": "110325409147468293205",
+      "id": 3
+    },
+    {
+      "title": "Stream_4",
+      "description": "Component that reuse a form component",
+      "userId": "110325409147468293205",
+      "id": 4
+    }
+  ]
+}
